@@ -1,0 +1,22 @@
+export class Mobile {
+    constructor(public mobileId:string,
+        public texture:string,
+        public price:number,
+        public category:string,
+        public length:number,
+        public width:number,
+        public material:string,
+        public rating:number,
+        public description:string,
+        public launchDate:Date,
+        public brand:string,
+        public model:string,
+        public ram:number,
+        public storage:number,
+        public os:string,
+        public manufacturer:string,
+        public battery:number,
+        public weight:number,
+        public displayTechnology:string,
+        public color:string){}
+}

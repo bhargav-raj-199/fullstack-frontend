@@ -1,3 +1,10 @@
 .filler{
     flex: 1 1 auto;
 }
+.icon{
+    background: transparent;
+}
+.nav-bar{
+    margin: 0;
+    padding: 0;
+}

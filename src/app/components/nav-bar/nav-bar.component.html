@@ -1,31 +1,27 @@
-<p>
+<p class="nav-bar">
     <mat-toolbar >
+      <button (click)="previous()" *ngIf="!disable"><mat-icon>arrow_back</mat-icon></button>
      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" [matMenuTriggerFor]="appMenu">
       <mat-icon [ngStyle]="{'color': 'orange'}">menu</mat-icon>
     </button>
     <span [ngStyle]="{'margin':'15px'}"></span>
     <span [ngStyle]="{'color': 'orange'}">Mobile <span [ngStyle]="{'color': 'cyan'}">Store</span> </span>
     <span class="filler"></span>
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-      <mat-icon [ngStyle]="{'color': 'orange'}">home</mat-icon>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" [matMenuTriggerFor]="personMenu">
+      <mat-icon [ngStyle]="{'color': 'orange'}" class="icon">account_circle</mat-icon>
     </button>
     
   </mat-toolbar>
   </p>
 
-  <mat-menu #subMenu="matMenu"> 
-    <mat-selection-list >
-      <mat-list-option *ngFor="let column of columns" value="column">
-        {{column}}
-      </mat-list-option>
-    </mat-selection-list>
-   </mat-menu > 
+  <mat-menu #personMenu="matMenu">
+    <button mat-raised-button  color="primary" mat-menu-item  (click)="logout()">LogOut</button>
+    </mat-menu>
 
-  
-  
   <mat-menu #appMenu="matMenu">
-  <button mat-raised-button  color="primary" mat-menu-item [matMenuTriggerFor]="subMenu">column chooser</button>
-  <button mat-raised-button  color="primary" mat-menu-item>LogOut</button>
+  <!-- <button mat-raised-button  color="primary" mat-menu-item [matMenuTriggerFor]="subMenu">column chooser</button> -->
+  <button mat-raised-button  color="primary" mat-menu-item  [routerLink]="['/mobiles']"> Mobiles </button>
+  <!-- <button mat-raised-button  color="primary" mat-menu-item  (click)="logout()">LogOut</button> -->
   </mat-menu>
   
       

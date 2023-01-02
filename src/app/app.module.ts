@@ -10,7 +10,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './modules/material/material.module';
 import { CommonModule } from '@angular/common';
 import { AuthModule } from './modules/auth/auth.module';
@@ -34,7 +34,8 @@ import { AuthModule } from './modules/auth/auth.module';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

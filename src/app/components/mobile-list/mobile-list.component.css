@@ -2,10 +2,55 @@
 float:right;
 position:relative;
 }
-.list-table{
-    position:relative;
-}
+
 tr:hover{
     background-color:rgb(214, 124, 15);
    
 }
+div.table{
+    overflow: scroll;
+    width: 100%;
+}
+
+td{
+    height: 50px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 160px;
+}
+.select{
+    color:orange;
+    
+}
+th.mat-header-cell{
+    text-align: center;
+}
+img {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 25px;
+    width: 100px;
+}  
+.example-spacer{
+    flex: 1 1 auto;
+}
+
+.list{
+    overflow: scroll;
+}
+.tile{
+    /* border: 5px; */
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px rgb(27, 170, 195);
+    color: black;
+    background-color: rgb(247, 153, 46);
+    
+  
+      
+  }
+  .tile:hover{
+    margin-top: -2;
+    background-color:   aqua
+  }

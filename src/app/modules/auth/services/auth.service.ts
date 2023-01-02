@@ -37,7 +37,7 @@ export class AuthService {
     this.keycloakService.getKeycloakInstance().accountManagement();
   }
 
-  public getRoles():String[] {
+  public getRoles():string[] {
     return this.keycloakService.getUserRoles();
   }
 }

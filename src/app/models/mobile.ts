@@ -1,22 +1,30 @@
-export class Mobile {
-    constructor(public mobileId:string,
-        public texture:string,
-        public price:number,
-        public category:string,
-        public length:number,
-        public width:number,
-        public material:string,
-        public rating:number,
-        public description:string,
-        public launchDate:Date,
-        public brand:string,
-        public model:string,
-        public ram:number,
-        public storage:number,
-        public os:string,
-        public manufacturer:string,
-        public battery:number,
-        public weight:number,
-        public displayTechnology:string,
-        public color:string){}
+type NonNullableMobile = {
+    
+   
+    // constructor(
+         mobileId:string,
+         texture:string,
+         price:number,
+         category:string,
+         length:number,
+
+         width:number,
+         material:string,
+         rating:number,
+         description:string,
+         brand:string,
+
+         model:string,
+         ram:number,
+         storage:number,
+         os:string,
+         manufacturer:string,
+         
+         battery:number,
+         weight:number,
+         displayTechnology:string,
+         color:string
+        
 }
+type Nullable<T> = { [P in keyof T]: T[P] | null; }
+export type Mobile = Nullable<NonNullableMobile>

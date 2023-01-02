@@ -7,6 +7,18 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import {MatListModule} from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+import {MatCardModule} from '@angular/material/card'
+import {MatRadioModule} from '@angular/material/radio'
+import {MatAutocompleteModule} from '@angular/material/autocomplete'
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import { FlexLayoutModule} from '@angular/flex-layout';
+import {MatGridListModule} from '@angular/material/grid-list';
+
+
 
 
 
@@ -20,6 +32,18 @@ import { MatSelectModule } from '@angular/material/select';
     MatMenuModule,
     MatTableModule,
     MatListModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatCardModule,
+    MatRadioModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    FlexLayoutModule,
+    MatGridListModule,
+    
     
     
     
@@ -32,7 +56,17 @@ import { MatSelectModule } from '@angular/material/select';
     MatMenuModule,
     MatTableModule,
     MatListModule,
-    
+    MatSelectModule,
+    MatOptionModule,
+    MatCardModule,
+    MatRadioModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    FlexLayoutModule,
+    MatGridListModule,
   ]
 })
 export class MaterialModule { }

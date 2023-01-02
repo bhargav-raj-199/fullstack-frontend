@@ -1,173 +1,202 @@
 
-<button mat-raised-button class="right" [ngStyle]="{'color': 'cyan'}"><mat-icon [ngStyle]="{'color': 'orange'}">settings</mat-icon></button>
-
-<span [ngStyle]="{'padding': '5px'}"></span>
-     
+<!-- <button mat-raised-button class="right" [ngStyle]="{'color': 'cyan'}" >Done</button> -->
+<div>
     
-    
-    
-<table mat-table [dataSource]="mobiles" width="100%" class="list-table">
+    <p>
+      <mat-toolbar color="accent">
+        <button mat-raised-button color="warn" (click)="view()">
+            <mat-icon aria-hidden="false" aria-label="Example home icon">
+               grid_on
+           </mat-icon>
+       </button>
+       <button mat-raised-button [routerLink]="['/add']" *ngIf="role.includes('MANAGER')" >ADD MOBILE</button>
+        <span class="example-spacer"></span>
+        <mat-form-field appearance="fill"  color="warn" >
+            <mat-label >choose columns </mat-label>
+            <mat-select [formControl]="columns" (selectionChange)="onItemSelect($event)" multiple class="select">
+                <mat-select-trigger>
+                    {{columns.value?.[0] || ''}}
+                    <span *ngIf="(columns.value?.length || 0) > 1" class="example-additional-selection">
+                      (+{{(columns.value?.length || 0) - 1}} {{columns.value?.length === 2 ? 'other' : 'others'}})
+                    </span>
+                  </mat-select-trigger>
+              <mat-option *ngFor="let column of columns1" (onSelect)="onItemSelect($event)" [value]="column" >{{column}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          
+      </mat-toolbar>
+    </p>
+</div>
 
-    
-    <ng-container matColumnDef="mobileId">
-        <th mat-header-cell *matHeaderCellDef> S.No </th>
-        <td mat-cell *matCellDef="let mobile"> {{mobile.mobileId}} </td>
-      </ng-container>
 
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let mobile"> {{mobile.name}} </td>
-      </ng-container>
 
-      <ng-container matColumnDef="height">
-        <th mat-header-cell *matHeaderCellDef> Height </th>
-        <td mat-cell *matCellDef="let mobile"> {{mobile.height}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="mfgDate">
-        <th mat-header-cell *matHeaderCellDef> MfgDate </th>
-        <td mat-cell *matCellDef="let mobile"> {{mobile.mfgDate}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="img">
-        <th mat-header-cell *matHeaderCellDef> img </th>
-        <td mat-cell *matCellDef="let mobile"> {{mobile.img}} </td>
-      </ng-container>
+<div>
+  <div *ngIf="grid==true" >
+    <mat-card class="example-card" style="width: 97%">
+        <mat-card-content>
+          <div fxLayout="row wrap" fxLayoutGap="16px grid">
+            <div
+              fxFlex="25"
+              fxFlex.sm="33"
+              fxFlex.xs="50"
+              *ngFor="let mobile of mobiles"
+            >
+              <mat-grid-list cols="1" rowHeight="1:1" class="grid-list">
+                <mat-grid-tile
+                  class="tile"
+                  (click)="detail(mobile)"
+                  
+                >
+                 
+                  <div>
+                      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbsr1V2M7aPGTP1zVALlLOOgJJEG49ppdCVw&usqp=CAU" width="100px" height="100px" alt="">
+                  
       
+                    <h4>Brand : {{mobile.brand}}</h4>
+                    <h4>Model :{{mobile.model}}</h4>
+      
+                    <h4>price : {{mobile.price}}</h4>
+                    
+                  </div>
+                </mat-grid-tile>
+              </mat-grid-list>
+            </div>
+          </div>
+        </mat-card-content>
+    
+      </mat-card>
 
-  <ng-container matColumnDef="brand">
-    <th mat-header-cell *matHeaderCellDef> Brand </th>
-    <td mat-cell *matCellDef="let mobile"> {{mobile.brand}} </td>
-  </ng-container>
+</div>
 
-  <ng-container matColumnDef="model">
-    <th mat-header-cell *matHeaderCellDef> Model </th>
-    <td mat-cell *matCellDef="let mobile"> {{mobile.model}} </td>
-  </ng-container>
+     
+    <div *ngIf="grid==false" [ngClass]="{'list': 'true'}">
+        <table mat-table [dataSource]="mobiles" width="100%" class="list-table">
 
-  <ng-container matColumnDef="color">
-    <th mat-header-cell *matHeaderCellDef> Color </th>
-    <td mat-cell *matCellDef="let mobile"> {{mobile.color}} </td>
-  </ng-container>
 
-  <ng-container matColumnDef="os">
-    <th mat-header-cell *matHeaderCellDef> OperatingSystem </th>
-    <td mat-cell *matCellDef="let mobile"> {{mobile.os}} </td>
-  </ng-container>
+            <ng-container matColumnDef="mobileId">
+                <th mat-header-cell *matHeaderCellDef> Id </th>
+                <td mat-cell *matCellDef="let mobile"> {{mobile.mobileId}} </td>
+              </ng-container>
 
-  <ng-container matColumnDef="ram">
-    <th mat-header-cell *matHeaderCellDef> Ram </th>
-    <td mat-cell *matCellDef="let mobile"> {{mobile.ram}} </td>
-  </ng-container>
+          <ng-container matColumnDef="brand">
+            <th mat-header-cell *matHeaderCellDef> Brand </th>
+            <td mat-cell *matCellDef="let mobile"> {{mobile.brand}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="model">
+            <th mat-header-cell *matHeaderCellDef> Model </th>
+            <td mat-cell *matCellDef="let mobile"> {{mobile.model}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="color">
+            <th mat-header-cell *matHeaderCellDef> Color </th>
+            <td mat-cell *matCellDef="let mobile"> {{mobile.color}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="os">
+            <th mat-header-cell *matHeaderCellDef> OperatingSystem </th>
+            <td mat-cell *matCellDef="let mobile"> {{mobile.os}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="ram">
+            <th mat-header-cell *matHeaderCellDef> Ram </th>
+            <td mat-cell *matCellDef="let mobile"> {{mobile.ram}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="storage">
+            <th mat-header-cell *matHeaderCellDef> Storage </th>
+            <td mat-cell *matCellDef="let mobile"> {{mobile.storage}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="displayTechnology">
+            <th mat-header-cell *matHeaderCellDef> Display Technology </th>
+            <td mat-cell *matCellDef="let mobile"> {{mobile.displayTechnology}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="battery">
+            <th mat-header-cell *matHeaderCellDef> Battery </th>
+            <td mat-cell *matCellDef="let mobile"> {{mobile.battery}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="manufacturer">
+            <th mat-header-cell *matHeaderCellDef> Manufacturer </th>
+            <td mat-cell *matCellDef="let mobile"> {{mobile.manufacturer}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="texture">
+            <th mat-header-cell *matHeaderCellDef> Texture </th>
+            <td mat-cell *matCellDef="let mobile"> {{mobile.texture}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef> Price </th>
+            <td mat-cell *matCellDef="let mobile"> {{mobile.price}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="length">
+            <th mat-header-cell *matHeaderCellDef> Length </th>
+            <td mat-cell *matCellDef="let mobile"> {{mobile.length}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="width">
+            <th mat-header-cell *matHeaderCellDef> Width </th>
+            <td mat-cell *matCellDef="let mobile"> {{mobile.width}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="weight">
+            <th mat-header-cell *matHeaderCellDef> Weight </th>
+            <td mat-cell *matCellDef="let mobile"> {{mobile.weight}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="category">
+            <th mat-header-cell *matHeaderCellDef> Category </th>
+            <td mat-cell *matCellDef="let mobile"> {{mobile.category}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="material">
+            <th mat-header-cell *matHeaderCellDef> Material </th>
+            <td mat-cell *matCellDef="let mobile"> {{mobile.material}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="rating">
+            <th mat-header-cell *matHeaderCellDef> Rating </th>
+            <td mat-cell *matCellDef="let mobile"> {{mobile.rating}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="launchDate">
+            <th mat-header-cell *matHeaderCellDef> LaunchDate </th>
+            <td mat-cell *matCellDef="let mobile"> {{mobile.launchDate}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let mobile"> {{mobile.description}} </td>
+          </ng-container>
 
-  <ng-container matColumnDef="storage">
-    <th mat-header-cell *matHeaderCellDef> Storage </th>
-    <td mat-cell *matCellDef="let mobile"> {{mobile.storage}} </td>
-  </ng-container>
+          <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef> Edit</th>
+            <td mat-cell *matCellDef="let mobile">  
+                    <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" (click)="onClickEdit(mobile.mobileId)" *ngIf="role.includes('MANAGER')||role.includes('EDITOR')"  >
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                  
+                  </td>
+          </ng-container>
 
-  <ng-container matColumnDef="displayTechnology">
-    <th mat-header-cell *matHeaderCellDef> Display Technology </th>
-    <td mat-cell *matCellDef="let mobile"> {{mobile.displayTechnology}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="battery">
-    <th mat-header-cell *matHeaderCellDef> Battery </th>
-    <td mat-cell *matCellDef="let mobile"> {{mobile.battery}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="manufacturer">
-    <th mat-header-cell *matHeaderCellDef> Manufacturer </th>
-    <td mat-cell *matCellDef="let mobile"> {{mobile.manufacturer}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="texture">
-    <th mat-header-cell *matHeaderCellDef> Texture </th>
-    <td mat-cell *matCellDef="let mobile"> {{mobile.texture}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="price">
-    <th mat-header-cell *matHeaderCellDef> Price </th>
-    <td mat-cell *matCellDef="let mobile"> {{mobile.price}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="length">
-    <th mat-header-cell *matHeaderCellDef> Length </th>
-    <td mat-cell *matCellDef="let mobile"> {{mobile.length}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="width">
-    <th mat-header-cell *matHeaderCellDef> Width </th>
-    <td mat-cell *matCellDef="let mobile"> {{mobile.width}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="weight">
-    <th mat-header-cell *matHeaderCellDef> Weight </th>
-    <td mat-cell *matCellDef="let mobile"> {{mobile.weight}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="category">
-    <th mat-header-cell *matHeaderCellDef> Category </th>
-    <td mat-cell *matCellDef="let mobile"> {{mobile.category}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="material">
-    <th mat-header-cell *matHeaderCellDef> Material </th>
-    <td mat-cell *matCellDef="let mobile"> {{mobile.material}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="rating">
-    <th mat-header-cell *matHeaderCellDef> Rating </th>
-    <td mat-cell *matCellDef="let mobile"> {{mobile.rating}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="launchDate">
-    <th mat-header-cell *matHeaderCellDef> LaunchDate </th>
-    <td mat-cell *matCellDef="let mobile"> {{mobile.launchDate}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="description">
-    <th mat-header-cell *matHeaderCellDef> Description </th>
-    <td mat-cell *matCellDef="let mobile"> {{mobile.description}} </td>
-  </ng-container>
-  
-
-  <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayColumns;"></tr>
-</table>
-
-<!--import {Component} from '@angular/core';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
-
-/**
- * @title Basic use of `<table mat-table>`
- */
-@Component({
-  selector: 'table-basic-example',
-  styleUrls: ['table-basic-example.css'],
-  templateUrl: 'table-basic-example.html',
-})
-export class TableBasicExample {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
-}
--->
-
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef>Delete</th>
+            <td mat-cell *matCellDef="let mobile"><button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" (click)="delete(mobile.mobileId)" *ngIf="role.includes('MANAGER')">
+                <mat-icon>delete</mat-icon>
+              </button></td>
+          </ng-container>
+          
+          <tr></tr>
+          <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayColumns;"  (click)="detail(row)"   ></tr>
+        </table>
+    </div>
+      
+        
+      
+      
+      

@@ -1,1 +1,280 @@
-<p>add-mobile works!</p>
+<div class="addmobilecontainer">
+<mat-card class="example-card">
+    <form [formGroup]="addForm" [ngClass]="'form'" (ngSubmit)="onAddMobile(addForm)"> 
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title [ngClass]="'orange'" class="'center'">{{firstName}} <span style="color: aqua;">{{lastName}}</span> </mat-card-title>
+    </mat-card-header>
+    
+    <mat-card-content>
+        <table [ngClass]="'form-table'">
+            <tr>
+                <td><label><span [ngClass]="'orange'">mobileId</span>
+                    </label></td>
+                <td> <mat-form-field color="accent" class="example-full-width" appearance="fill" >
+                    <mat-label>Mobile Id</mat-label>
+                    <input matInput placeholder="enter Id" formControlName="mobileId" [readonly]="role">
+                  </mat-form-field></td>
+            </tr>
+            <tr>
+                <td><label><span [ngClass]="'orange'">Brand</span>
+                    </label></td>
+                <td> <mat-form-field color="accent" class="example-full-width" appearance="fill" >
+                    <mat-label>Brand</mat-label>
+                    <input matInput placeholder="enter brand" formControlName="brand" [readonly]="role">
+                  </mat-form-field></td>
+            </tr>
+            <tr>
+                <td>
+                        <label [ngClass]="'orange'">Model</label>
+                </td>
+                <td>
+               
+                      <mat-form-field class="example-full-width" appearance="fill" color="accent" >
+                       <mat-label>Model</mat-label>
+                       <input matInput placeholder="enter model" formControlName="model" [readonly]="role">
+                     </mat-form-field>
+               
+                     
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label [ngClass]="'orange'">Ram</label>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width" appearance="fill" color="accent" >
+                        <mat-label >Ram in GB</mat-label>
+                        <input matInput placeholder="enter ram" type=number formControlName="ram" [readonly]="role">
+                      </mat-form-field>
+                
+                      
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label [ngClass]="'orange'">Storage</label>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width" appearance="fill" color="accent" >
+                        <mat-label >Storage in GB</mat-label>
+                        <input matInput placeholder="enter storage" type=number formControlName="storage" [readonly]="role">
+                      </mat-form-field>
+                    
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label [ngClass]="'orange'">Operating System</label>
+                </td>
+                <td class="data">
+                    <fieldset [disabled]="role" class="fs">
+                    <mat-radio-group color="accent" formControlName="os" >
+                            <mat-radio-button  value="android">Android</mat-radio-button>
+                            <span class="space"></span>
+                            <mat-radio-button  value="ios">Ios</mat-radio-button>
+                            <span class="space"></span>
+                            <mat-radio-button  value="windows">Windows</mat-radio-button>
+                          </mat-radio-group>
+                        </fieldset>
+                </td>
+            </tr>
+           
+            <tr>
+                <td>
+                    <label [ngClass]="'orange'">length</label>
+                </td>
+                <td>
+                   <mat-form-field appearance="fill" color="accent" >
+                       <mat-label>length in inches</mat-label>
+                       <input matInput type=number formControlName="length" [readonly]="role">
+                     </mat-form-field>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label [ngClass]="'orange'">width</label>
+                </td>
+                <td>
+                    <mat-form-field appearance="fill" color="accent" >
+                        <mat-label>width in inches</mat-label>
+                        <input matInput type=number formControlName="width" [readonly]="role">
+                      </mat-form-field>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label [ngClass]="'orange'">weight</label>
+                </td>
+                <td>
+                    <mat-form-field appearance="fill" color="accent" >
+                        <mat-label>weight in grams</mat-label>
+                        <input matInput type=number formControlName="weight" [readonly]="role">
+                      </mat-form-field>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label [ngClass]="'orange'">manufacturer</label>
+                </td>
+                <td>
+                    <mat-form-field appearance="fill" class="texture" >
+                        <mat-select required formControlName="manufacturer" >
+                          <mat-option [disabled]="role">-- None --</mat-option>
+                            <mat-option value="manufacturer" *ngFor="let manufacturer of manufacturers" [disabled]="role">{{manufacturer}}</mat-option>
+                          </mat-select>
+                        <mat-label>Select</mat-label>
+                      </mat-form-field>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label [ngClass]="'orange'">battery</label>
+                </td>
+                <td>
+                    <mat-form-field appearance="fill" color="accent" >
+                        <mat-label>Battery in 'mah'</mat-label>
+                        <input matInput type=number formControlName="battery" [readonly]="role">
+                      </mat-form-field>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label [ngClass]="'orange'">color</label>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width" appearance="fill" >
+                        <mat-label>Color</mat-label>
+                        <input type="text"
+                               placeholder="Pick one"
+                               aria-label="Color"
+                               matInput
+                               [readonly]="role"
+                               [matAutocomplete]="auto" formControlName="color">
+                        <mat-autocomplete #auto="matAutocomplete">
+                          <mat-option *ngFor="let color of colors" [value]="color" [disabled]="role">
+                            {{color}}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label [ngClass]="'orange'">Display Technology</label>
+                </td>
+                <td class="data">
+                    <fieldset [disabled]="role" class="fs">
+                       
+                    <mat-radio-group color="accent" formControlName="displayTechnology" >
+                        <mat-radio-button   value="2kamoled">2k Dynamic Amoled</mat-radio-button>
+                        <span class="space"></span>
+                        <mat-radio-button  value="amoled">amoled</mat-radio-button>
+                        <span class="space"></span>
+                        <mat-radio-button  value="lcd">lcd display</mat-radio-button>
+                        <span class="space"></span>
+                        <mat-radio-button  value="retina">retina hdr display</mat-radio-button>
+                      </mat-radio-group>
+                    </fieldset>
+                </td>
+                
+            </tr>
+            
+            <tr>
+                <td>
+                    <label [ngClass]="'orange'">Price</label>
+                </td>
+                <td>
+                    <mat-form-field appearance="fill" floatLabel="always"  color="accent">
+                        <mat-label>Amount</mat-label>
+                        <!-- <span matTextPrefix>&nbsp;</span> -->
+                        <input matInput type="number" formControlName="price" class="example-right-align" placeholder="0">
+                        
+                        <span matTextSuffix>Rs/-&nbsp;</span>
+                      </mat-form-field>
+                    
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label [ngClass]="'orange'">Texture</label>
+                </td>
+                <td>
+                    
+
+                    <mat-form-field appearance="fill" class="texture" >
+                      <mat-select required formControlName="texture">
+                        <mat-option [disabled]="role">-- None --</mat-option>
+                          <mat-option [value]="texture" *ngFor="let texture of textures">{{texture}}</mat-option>
+                        </mat-select>
+                      <mat-label>Select</mat-label>
+                    </mat-form-field>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label [ngClass]="'orange'">Category</label>
+                </td>
+                <td>
+                    <mat-form-field appearance="fill" color="accent" >
+                        <mat-label>enter category"</mat-label>
+                        <input matInput type=text value="Electronics" formControlName="category" [readonly]="role">
+                      </mat-form-field>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label [ngClass]="'orange'">Material</label>
+                </td>
+                <td>
+                    <mat-form-field appearance="fill" color="accent" >
+                        <mat-label>enter material"</mat-label>
+                        <input matInput type=text formControlName="material" [readonly]="role">
+                      </mat-form-field>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label [ngClass]="'orange'">Rating</label>
+                </td>
+                <td>
+                    <mat-form-field appearance="fill" color="accent" >
+                        <mat-label>enter rating"</mat-label>
+                        <input matInput type=number formControlName="rating" [readonly]="role">
+                      </mat-form-field>
+                </td>
+            </tr>
+            <!-- <tr>
+                <td>
+                    <label>Launch Date</label>
+                </td>
+                <td>
+                    <mat-form-field appearance="fill" color="accent" >
+                        <mat-label>Choose a date</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="launchDate">
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+                      </mat-form-field> 
+                </td>
+            </tr> -->
+            <tr>
+                <td>
+                    <label [ngClass]="'orange'">Description</label>
+                </td>
+                <td>
+                    <mat-form-field appearance="fill" color="accent" >
+                        <mat-label>Textarea</mat-label>
+                        <textarea matInput width="250" length="250" formControlName="description" [readonly]="role"></textarea>
+                      </mat-form-field>
+                </td>
+            </tr>
+        </table>
+             <button mat-raised-button class="'submit-button'" [disabled]="role"><h2>submit</h2> </button>
+
+    </mat-card-content>
+</form>
+  </mat-card>
+</div>
+  
+

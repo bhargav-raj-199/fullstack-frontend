@@ -1,4 +1,7 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/modules/auth/services/auth.service';
 import { MobileService } from 'src/app/services/mobile.service';
 
 @Component({
@@ -9,6 +12,10 @@ import { MobileService } from 'src/app/services/mobile.service';
 export class NavBarComponent implements OnInit {
   mobiles:any[]=[];
   columns:any=[];
+  disable: boolean=false;
+  logout(){
+    this._authService.logout();
+  }
   getData(){
    
 
@@ -17,9 +24,16 @@ export class NavBarComponent implements OnInit {
       this.columns=Object.keys(element);
     })
   };
-  constructor(private _mobileService:MobileService) { }
+  constructor(private _mobileService:MobileService,
+    private _authService:AuthService,
+    private _location:Location,
+    private _router:Router) { }
 
   ngOnInit(): void {
+
+    this._router.events.subscribe(()=>{
+      this.disable=this._router.url==='/mobiles';
+    })
 
     this._mobileService.getAll().subscribe({
       next:(data)=>{this.mobiles=data;
@@ -31,6 +45,9 @@ export class NavBarComponent implements OnInit {
     })
     this.getData();
     
+  }
+  previous(){
+    this._location.back()
   }
 
 }
